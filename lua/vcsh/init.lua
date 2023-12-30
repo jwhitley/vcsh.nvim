@@ -55,6 +55,7 @@ local getRepos = function()
 			break
 		end
 		if type == "directory" then
+			name, _ = string.gsub(name, "%.git$", "")
 			table.insert(repos, name)
 		end
 	end
