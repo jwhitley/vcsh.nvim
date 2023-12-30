@@ -66,7 +66,7 @@ M.vcshEnterSelect = function()
 	vim.ui.select(getRepos(), { prompt = "Choose a vcsh repo" }, M.vcshEnter)
 end
 
-vim.api.nvim_create_user_command("VcshEnter", M.vcshEnterSelect)
-vim.api.nvim_create_user_command("VcshExit", M.vcshExit)
+vim.api.nvim_create_user_command("VcshEnter", M.vcshEnterSelect, { desc = "Enter a vcsh repo" })
+vim.api.nvim_create_user_command("VcshExit", M.vcshExit, { desc = "Exit a vcsh repo" })
 
 return M
