@@ -55,7 +55,6 @@ local getRepos = function()
 			break
 		end
 		if type == "directory" then
-			name, _ = string.gsub(name, "%.git$", "")
 			table.insert(repos, name)
 		end
 	end
@@ -64,7 +63,13 @@ local getRepos = function()
 end
 
 M.vcshEnterSelect = function()
-	vim.ui.select(getRepos(), { prompt = "Choose a vcsh repo" }, M.vcshEnter)
+	vim.ui.select(getRepos(), {
+		prompt = "Choose a vcsh repo",
+		format_item = function(item)
+			local repo, _ = string.gsub(item, "%.git$", "")
+			return repo
+		end,
+	}, M.vcshEnter)
 end
 
 vim.api.nvim_create_user_command("VcshEnter", M.vcshEnterSelect, { desc = "Enter a vcsh repo" })
